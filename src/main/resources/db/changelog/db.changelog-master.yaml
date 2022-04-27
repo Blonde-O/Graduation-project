@@ -1,0 +1,6 @@
+databaseChangeLog:
+  - include: # список активных миграций
+      file: db/migrations/schema.xml # путь к файлу миграции
+
+  - include: # список активных миграций
+      file: db/migrations/data.xml # путь к файлу миграции

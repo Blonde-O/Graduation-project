@@ -8,8 +8,7 @@ spring:
         root-command: spring-shell-samples
   ## disable console logging
   datasource:
-    driverClassName: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/gp_db
+    url: jdbc:mysql://localhost:3306/gp_db?serverTimezone=UTC
     username: root
     password: password
 

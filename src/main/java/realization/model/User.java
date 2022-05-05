@@ -1,4 +1,4 @@
-package model;
+package realization.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -12,29 +12,27 @@ import javax.validation.constraints.NotNull;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "bank")
-public class Bank {
+@Table(name = "user")
+public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
+    private int id;
 
     @NotEmpty
-    private String text;
+    private String fio;
 
     @NotEmpty
-    private String var_1;
+    private String login;
 
     @NotEmpty
-    private String var_2;
-
-    @NotEmpty
-    private String var_3;
-
-    @NotEmpty
-    private String var_4;
+    private String password;
 
     @NotNull
-    private Integer control;
+    private int role;
+
+    @OneToOne(mappedBy = "user")
+    private Result result;
+
 
 }

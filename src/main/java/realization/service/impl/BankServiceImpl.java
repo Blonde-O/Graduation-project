@@ -1,15 +1,16 @@
-package service.impl;
+package realization.service.impl;
 
-import lombok.NoArgsConstructor;
+
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import repository.BankRepository;
-import service.BankService;
+import realization.repository.BankRepository;
+import realization.service.BankService;
 
 
 @Service
 @RequiredArgsConstructor
 public class BankServiceImpl implements BankService {
+
 
     private final BankRepository bankRepository;
 

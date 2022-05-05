@@ -1,6 +1,6 @@
-package repository;
+package realization.repository;
 
-import model.Result;
+import realization.model.Result;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface ResultRepository extends JpaRepository<Result, Integer> {

@@ -16,7 +16,7 @@ import javax.validation.constraints.NotNull;
 public class Bank {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @NotEmpty

@@ -1,4 +1,3 @@
-/*
 package realization.controller;
 
 import realization.dto.BankDto;
@@ -12,11 +11,11 @@ import realization.service.BankService;
 @RequestMapping("/student")
 @RequiredArgsConstructor
 public class BankController {
-    private final BankRepository bankRepository;
+    private final BankService bankService;
 
     @GetMapping("/questions")
-    public Bank findQuestion(@RequestParam("arg1") Integer questionId){
-        return bankRepository.getById(questionId);
+    public String findQuestion(@RequestParam("arg1") Integer questionId){
+        return bankService.getVar1(questionId);
 
 
     }
@@ -24,4 +23,3 @@ public class BankController {
 
 
 }
-*/

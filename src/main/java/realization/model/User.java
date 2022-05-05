@@ -16,8 +16,8 @@ import javax.validation.constraints.NotNull;
 public class User {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
 
     @NotEmpty
     private String fio;
@@ -29,7 +29,7 @@ public class User {
     private String password;
 
     @NotNull
-    private int role;
+    private Integer role;
 
     @OneToOne(mappedBy = "user")
     private Result result;

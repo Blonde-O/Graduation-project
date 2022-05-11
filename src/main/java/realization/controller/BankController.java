@@ -36,10 +36,10 @@ public class BankController {
     }*/
 
     @GetMapping("/questions")
-    public List<String> findQuestion(@RequestParam("arg1") Integer questionId){
+    public List<BankDto> findQuestion(@RequestParam("arg1") Integer questionId){
         Set<Integer> generated = new HashSet<Integer>();
         Random r = new Random();
-        while (generated.size() < 6) {
+        while (generated.size() < 3) {
             generated.add(r.nextInt(10) + 1);
         }
         List<BankDto> bankDtoList = new ArrayList<>();
@@ -48,8 +48,8 @@ public class BankController {
                     bankService.getVar2(id), bankService.getVar3(id),
                     bankService.getVar4(id), bankService.getControl(id)));
         }
-        List<String> textList=bankDtoList.stream().map(x-> x.getText()).collect(Collectors.toList());
-        return textList;
+
+        return bankDtoList;
     }
     @PostMapping("/questions/postresult")
     public void postResult(@RequestParam("arg1") Integer value, @RequestParam("arg2") Integer id){

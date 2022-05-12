@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class BankDto {
 
+    private Integer id;
     private String text;
     private String var1;
     private String var2;

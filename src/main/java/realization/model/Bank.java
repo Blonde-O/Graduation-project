@@ -23,16 +23,20 @@ public class Bank {
     private String text;
 
     @NotEmpty
-    private String var_1;
+    @Column(name = "var_1")
+    private String var1;
 
     @NotEmpty
-    private String var_2;
+    @Column(name = "var_2")
+    private String var2;
 
     @NotEmpty
-    private String var_3;
+    @Column(name = "var_3")
+    private String var3;
 
     @NotEmpty
-    private String var_4;
+    @Column(name = "var_4")
+    private String var4;
 
     @NotNull
     private Integer control;

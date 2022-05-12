@@ -1,10 +1,13 @@
 package realization.repository;
 
+import org.springframework.data.jpa.repository.Query;
 import realization.model.Bank;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
 
+import java.util.List;
 
 
 public interface BankRepository extends JpaRepository<Bank, Integer> {
+    @Query(value = "SELECT * FROM bank ORDER BY rand() LIMIT 3 ", nativeQuery = true)
+    List<Bank> questions();
 }

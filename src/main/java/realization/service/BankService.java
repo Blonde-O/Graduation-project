@@ -1,6 +1,12 @@
 package realization.service;
 
+import realization.dto.BankDto;
+import realization.model.Bank;
+
+import java.util.List;
+
 public interface BankService {
+/*
 
     String getText(Integer id);
 
@@ -10,9 +16,11 @@ public interface BankService {
 
     String getVar3(Integer id);
 
-    String getVar4(Integer id);
+    String getVar4(Integer id);*/
 
     Integer getControl(Integer id);
+
+    List<BankDto> findAll();
 
 
 }

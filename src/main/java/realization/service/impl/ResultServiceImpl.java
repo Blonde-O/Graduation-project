@@ -3,6 +3,7 @@ package realization.service.impl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
+import realization.dto.ResultDto;
 import realization.model.Result;
 import realization.model.User;
 import realization.repository.ResultRepository;
@@ -45,5 +46,15 @@ public class ResultServiceImpl implements ResultService {
         result.setValue(total);
         resultRepository.save(result);
         return total;
+    }
+
+    @Override
+    public List<ResultDto> getAllResults() {
+        List <Result> resultList= resultRepository.findAll();
+        List <ResultDto> resultDtoList = resultList.stream()
+                .map(x-> new ResultDto( x.getId(),x.getUser().getFio(), x.getValue()))
+                .toList();
+        System.out.println(resultDtoList);
+        return  resultDtoList;
     }
 }

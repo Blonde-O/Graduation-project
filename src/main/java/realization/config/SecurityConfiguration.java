@@ -38,6 +38,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .authorizeRequests().antMatchers(
                         "/student_v2.html")
                 .hasAuthority("student")
+                .and()
+                .authorizeRequests().antMatchers(
+                        "/teacher.html")
+                .hasAuthority("teacher")
                 .and().formLogin();
 
     }

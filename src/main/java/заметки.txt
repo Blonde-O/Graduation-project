@@ -1,1 +1,4 @@
 https://any-test.ru/answers/test/obj?page=1&pageSize=20
+https://habr.com/ru/post/346296/
+https://ducmanhphan.github.io/2019-02-22-Logout-in-Spring-Boot/
+TRUNCATE table result;

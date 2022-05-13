@@ -37,8 +37,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .and()
                 .authorizeRequests().antMatchers(
                         "/student_v2.html")
-                .authenticated()
+                .hasAuthority("student")
                 .and().formLogin();
+
     }
 
     @Bean

@@ -28,8 +28,8 @@ public class User {
     @NotEmpty
     private String password;
 
-    @NotNull
-    private Integer role;
+    @NotEmpty
+    private String role;
 
     @OneToOne(mappedBy = "user")
     private Result result;

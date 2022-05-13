@@ -1,5 +1,8 @@
 package realization.controller;
 
+import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.context.SecurityContextHolder;
 import realization.dto.BankDto;
 import lombok.RequiredArgsConstructor;
 import realization.model.Bank;
@@ -9,18 +12,23 @@ import realization.model.User;
 import realization.repository.BankRepository;
 import realization.repository.ResultRepository;
 import realization.repository.UserRepository;
+import realization.security.UserPrincipal;
 import realization.service.BankService;
+import realization.service.ResultService;
 
 import java.util.*;
 import java.util.stream.Collectors;
 
 @RestController
+@Secured("student")
 @RequestMapping("/student")
 @RequiredArgsConstructor
 public class BankController {
     private final BankService bankService;
+    private final ResultService resultService;
     private final ResultRepository resultRepository;
     private final UserRepository userRepository;
+
 
     @GetMapping("/questions")
     public List<BankDto> findQuestion() {
@@ -29,19 +37,8 @@ public class BankController {
 
     @PostMapping
     public void complete(@RequestParam Map<String, String> allRequestParams) {
-        System.out.println(allRequestParams);
-        List<Integer> keys = allRequestParams.keySet().stream().map(x -> Integer.valueOf(x)).collect(Collectors.toList());
-        List<Integer> values = allRequestParams.values().stream().map(x -> Integer.valueOf(x)).collect(Collectors.toList());
-        Double averageGrade = 0.0;
-        for (int i = 0; i < keys.size(); i++) {
-            if (bankService.getControl(keys.get(i)) == values.get(i)) {
-                averageGrade += 1;
-            }
-        }
-        System.out.println(keys);
-        System.out.println(values);
-        System.out.println((100 * averageGrade / keys.size()) + "%");
-
+        Integer a = resultService.averageGrade(allRequestParams);
+        System.out.println(a + "%");
     }
 
 

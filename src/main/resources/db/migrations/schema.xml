@@ -23,7 +23,7 @@
             <column name="PASSWORD" type="VARCHAR(255)">
                 <constraints nullable="false"/>
             </column>
-            <column name="ROLE" type="INT">
+            <column name="ROLE" type="VARCHAR(255)">
                 <constraints nullable="false"/>
             </column>
         </createTable>

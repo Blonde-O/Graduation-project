@@ -4,33 +4,29 @@
     <meta charset="UTF-8">
     <title>Страница тестирования для студента</title>
     <link rel="stylesheet" th:href="@{/css/style.css}" href="/css/style.css"/>
-    <script src="/webjars/jquery/3.6.0/jquery.min.js" ></script>
-    <script type = "text/javascript">
+    <script src="/webjars/jquery/3.6.0/jquery.min.js"></script>
+    <script type="text/javascript">
         function getQuestions() {
-            $.get( "/student/questions", function( data ) {
+            $.get("/student/questions", function (data) {
                 for (let i = 0; i < data.length; i++) {
                     console.log(data[i].text);
                     $("#q").append("<p>").append(data[i].text).append("</p>")
-                    .append(
-                        '<input type="radio" id="'+ data[i].id +
-                        '"name="' + data[i].id + '" value="1">' +
-                        '<label htmlFor="' + data[i].id + '">' + data[i].var1 + '</label>',
-                        '<input type="radio" id="'+ data[i].id +
-                        '"name="' + data[i].id + '" value="2">' +
-                        '<label htmlFor="' + data[i].id + '">' + data[i].var2 + '</label>',
-                        '<input type="radio" id="'+ data[i].id +
-                        '"name="' + data[i].id + '" value="3">' +
-                        '<label htmlFor="' + data[i].id + '">' + data[i].var3 + '</label>',
-                        '<input type="radio" id="'+ data[i].id +
-                        '"name="' + data[i].id + '" value="4">' +
-                        '<label htmlFor="' + data[i].id + '">' + data[i].var4 + '</label>');
-
-
-
+                        .append(
+                            '<input type="radio" id="' + data[i].id +
+                            '"name="' + data[i].id + '" value="1">' +
+                            '<label htmlFor="' + data[i].id + '">' + data[i].var1 + '</label>',
+                            '<input type="radio" id="' + data[i].id +
+                            '"name="' + data[i].id + '" value="2">' +
+                            '<label htmlFor="' + data[i].id + '">' + data[i].var2 + '</label>',
+                            '<input type="radio" id="' + data[i].id +
+                            '"name="' + data[i].id + '" value="3">' +
+                            '<label htmlFor="' + data[i].id + '">' + data[i].var3 + '</label>',
+                            '<input type="radio" id="' + data[i].id +
+                            '"name="' + data[i].id + '" value="4">' +
+                            '<label htmlFor="' + data[i].id + '">' + data[i].var4 + '</label>');
                 }
-
             }, "json")
-                .fail(function() {
+                .fail(function () {
                     $("#rep")
                         .append('<br/><p style="color:red">Oops! Error with XMLHttpRequest</p>')
                 });
@@ -44,46 +40,12 @@
 <body>
 
 <div id="text">
-    Здесь будет тестирование
-
-    <!--<button id="start" type="button">start</button>-->
     <button id="start1" type="button" onclick="getQuestions()">Начать тестирование</button>
     <form action="/student" method="post">
-       <!-- <p>Please select your preferred contact method:</p>
-        <div>
-            <input type="radio" id="contactChoice1"
-                   name="contact" value="email">
-            <label for="contactChoice1">Email</label>
-
-            <input type="radio" id="contactChoice2"
-                   name="contact" value="phone">
-            <label for="contactChoice2">Phone</label>
-
-            <input type="radio" id="contactChoice3"
-                   name="contact" value="mail">
-            <label for="contactChoice3">Mail</label>
-        </div>
-
-        <div>
-            <input type="radio" id="r21"
-                   name="r2" value="email">
-            <label for="r21">Email</label>
-
-            <input type="radio" id="r22"
-                   name="r2" value="phone">
-            <label for="r22">Phone</label>
-
-            <input type="radio" id="r23"
-                   name="r2" value="mail">
-            <label for="r23">Mail</label>
-        </div>-->
-
         <div id="q">
-
         </div>
-
         <div>
-            <button type="submit" onclick="window.location.href = '/student_v2.html'">Submit11</button>
+            <button type="submit" onclick="window.location.href = '/student_v2.html';">Submit11</button>
         </div>
     </form>
 </div>

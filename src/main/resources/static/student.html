@@ -5,46 +5,44 @@
     <title>Страница тестирования для студента</title>
     <link rel="stylesheet" th:href="@{/css/style.css}" href="/css/style.css"/>
     <script src="/webjars/jquery/3.6.0/jquery.min.js"></script>
-    <script src="js/student.js"></script>
+    <script type="text/javascript">
+        window.onload = function getQuestions() {
+            $.get("/student/questions", function (data) {
+                for (let i = 0; i < data.length; i++) {
+                    console.log(data[i].text);
+                    $("#q").append("<p>").append(data[i].text).append("</p>")
+                        .append(
+                            '<input type="radio" id="' + data[i].id +
+                            '"name="' + data[i].id + '" value="1">' +
+                            '<label htmlFor="' + data[i].id + '">' + data[i].var1 + '</label>',
+                            '<input type="radio" id="' + data[i].id +
+                            '"name="' + data[i].id + '" value="2">' +
+                            '<label htmlFor="' + data[i].id + '">' + data[i].var2 + '</label>',
+                            '<input type="radio" id="' + data[i].id +
+                            '"name="' + data[i].id + '" value="3">' +
+                            '<label htmlFor="' + data[i].id + '">' + data[i].var3 + '</label>',
+                            '<input type="radio" id="' + data[i].id +
+                            '"name="' + data[i].id + '" value="4">' +
+                            '<label htmlFor="' + data[i].id + '">' + data[i].var4 + '</label>');
+                }
+            }, "json")
+                .fail(function () {
+                    $("#rep")
+                        .append('<br/><p style="color:red">Oops! Error with XMLHttpRequest</p>')
+                });
+        }
+    </script>
 </head>
 <body>
+
 <div id="text">
-    Здесь будет тестирование
-</div>
-<div id="body">
-    <div>
-        <label for="question0">Вопрос№1</label>
-        <p id="question0">
-
-        </p>
-    </div>
-    <div>
-        <label for="answer1"> Вариант ответа: </label>
-        <input id="answer1" type="text" name="answer1"/>
-    </div>
-    <div>
-        <label for="question1">Вопрос№2</label>
-        <p id="question1">
-
-        </p>
-    </div>
-    <div>
-        <label for="answer2"> Вариант ответа: </label>
-        <input id="answer2" type="text" name="answer2"/>
-    </div>
-    <div>
-        <label for="question2">Вопрос№3</label>
-        <p id="question2">
-
-        </p>
-    </div>
-    <div>
-        <label for="answer3"> Вариант ответа: </label>
-        <input id="answer3" type="text" name="answer3"/>
-    </div>
-    <div>
-        <button id="check"> Проверить</button>
-    </div>
+    <form action="/student" method="post">
+        <div id="q">
+        </div>
+        <div>
+            <button type="submit">Submit11</button>
+        </div>
+    </form>
 </div>
 </body>
 </html>

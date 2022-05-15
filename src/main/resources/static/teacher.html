@@ -6,10 +6,12 @@
     <link rel="stylesheet" th:href="@{/css/style.css}" href="/css/style.css"/>
     <script src="/webjars/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript">
-        function getResults() {
+        window.onload = function getResults() {
+            $("#q").append("<p>").append('№        ФИО студента        Средний балл.').append("</p>");
             $.get("/teacher/results", function (data) {
                 for (let i = 0; i < data.length; i++) {
-                    $("#q").append("<p>").append(data[i].id+ ' ' + data[i].fio+ ' '+ data[i].value+ '%').append("</p>")                        ;
+                    $("#q").append("<p>").append(data[i].id + '&nbsp;&nbsp;&nbsp' + data[i].fio
+                        + '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp' + data[i].value + '%').append("</p>");
                 }
             }, "json")
                 .fail(function () {
@@ -17,18 +19,13 @@
                         .append('<br/><p style="color:red">Oops! Error with XMLHttpRequest</p>')
                 });
         }
-
-        function a() {
-            alert('111');
-        }
     </script>
 </head>
 <body>
 
 <div id="text">
-    <button id="start1" type="button" onclick="getResults()">Показать результаты</button>
-        <div id="q">
-        </div>
+    <div id="q" >
+    </div>
 </div>
 </body>
 </html>

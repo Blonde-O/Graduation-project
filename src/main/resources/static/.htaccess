@@ -1,1 +1,0 @@
-   ErrorDocument 403 http://localhost:8080/forbidden.html

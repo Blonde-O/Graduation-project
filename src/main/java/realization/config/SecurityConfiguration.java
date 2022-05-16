@@ -30,7 +30,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     }
 
     @Override
-    protected void configure(HttpSecurity http) throws Exception {
+    protected void configure(final HttpSecurity http) throws Exception {
         http.csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/").permitAll()
@@ -44,7 +44,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .hasAuthority("teacher")
                 .and().formLogin()
                 .and()
-                .exceptionHandling().accessDeniedPage("/custom403.html");
+                .exceptionHandling().accessDeniedPage("/custom403.html")
+                .and().logout()
+                .logoutSuccessUrl("/")
+                .invalidateHttpSession(true)
+                .deleteCookies("JSESESSIONID");
 
 
     }

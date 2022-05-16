@@ -10,8 +10,13 @@
             $("#q").append("<p>").append('№        ФИО студента        Средний балл.').append("</p>");
             $.get("/teacher/results", function (data) {
                 for (let i = 0; i < data.length; i++) {
-                    $("#q").append("<p>").append(data[i].id + '&nbsp;&nbsp;&nbsp' + data[i].fio
-                        + '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp' + data[i].value + '%').append("</p>");
+                    if (data[i].value < 60) {
+                        $("#q").append('<p style=\"color:red\">').append(data[i].id + '&nbsp;&nbsp;&nbsp' + data[i].fio
+                            + '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp' + data[i].value + '%').append('</p>');
+                    } else {
+                        $("#q").append('<p style=\"color:green\">').append(data[i].id + '&nbsp;&nbsp;&nbsp' + data[i].fio
+                            + '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp' + data[i].value + '%').append('</p>');
+                    }
                 }
             }, "json")
                 .fail(function () {
@@ -26,5 +31,9 @@
     <div id="q">
     </div>
 </div>
+<button onclick="window.location.href='/logout'">
+    <img src="images/logout.jpg" style="vertical-align: middle">
+    Выйти из аккаунта
+</button>
 </body>
 </html>

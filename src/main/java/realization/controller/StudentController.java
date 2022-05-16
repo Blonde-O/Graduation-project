@@ -27,10 +27,16 @@ public class StudentController {
         return bankService.findAll();
     }
 
-    @PostMapping
+    /*@PostMapping
     public void complete(@RequestParam Map<String, String> allRequestParams) {
         Integer a = resultService.averageGrade(allRequestParams);
         System.out.println(a + "%");
+    }*/
+    @PostMapping
+    public Integer complete(@RequestParam Map<String, String> allRequestParams) {
+        Integer a = resultService.averageGrade(allRequestParams);
+        return a;
+
     }
 
 

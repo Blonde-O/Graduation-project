@@ -32,22 +32,52 @@
                 });
         }
     </script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#btn").click(function () {
+                    sendAjaxForm('result_form', 'ajax_form');
+                    return false;
+                }
+            );
+        });
+
+        function sendAjaxForm(result_form, ajax_form) {
+            $.ajax({
+                url: 'student',
+                type: "POST", //метод отправки
+                dataType: "html", //формат данных
+                data: $("#" + ajax_form).serialize(),
+                success: function (response) { //Данные отправлены успешно
+                    result = $.parseJSON(response);
+                    if (result < 60) {
+                        $('#result_form').html('Ваш результат:&nbsp ' + result + ' %.&nbsp Вы не сдали тест. ')
+                            .css("color", "red")
+                            .css("font-weight", "bold");
+                    } else {
+                        $('#result_form').html('Ваш результат:&nbsp ' + result + ' %.&nbsp Вы сдали тест.')
+                            .css("color", "green")
+                            .css("font-weight", "bold");
+                    }
+                },
+                error: function (response) { // Данные не отправлены
+                    $('#result_form').html('Ошибка. Данные не отправлены.');
+                }
+            });
+        }
+    </script>
 </head>
 <body>
 
 <div id="text">
-    <form action="/student" method="post">
+    <form method="post" id="ajax_form" action="">
         <div id="q">
         </div>
         <div>
-        <span id="result">
-            Проверка еще не выполнялась.
-        </span>
-        </div>
-        <div>
-            <button type="submit" id="check">Проверить</button>
+            <input type="button" id="btn" value="Отправить"/>
         </div>
     </form>
+    <br>
+    <div id="result_form"></div>
 </div>
 </body>
 </html>

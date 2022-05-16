@@ -26,7 +26,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(WebSecurity web) {
         web.ignoring()
-                .antMatchers("/css/**", "/webjars/**", "/js/**");
+                .antMatchers("/css/**", "/webjars/**", "/js/**", "/images/**");
     }
 
     @Override
@@ -42,7 +42,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .authorizeRequests().antMatchers(
                         "/teacher.html")
                 .hasAuthority("teacher")
-                .and().formLogin();
+                .and().formLogin()
+                .and()
+                .exceptionHandling().accessDeniedPage("/custom403.html");
+
 
     }
 

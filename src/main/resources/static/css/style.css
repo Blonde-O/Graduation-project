@@ -21,6 +21,10 @@ body {
     float: left;
 }
 
-#errorLabel {
-    display: none;
+.error {
+    color: red;
+    font-weight: bold;
+    font-size: 20px;
+    text-align: center;
+
 }

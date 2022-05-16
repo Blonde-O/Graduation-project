@@ -8,6 +8,6 @@ import java.util.List;
 
 
 public interface BankRepository extends JpaRepository<Bank, Integer> {
-    @Query(value = "SELECT * FROM BANK ORDER BY rand() LIMIT 5 ", nativeQuery = true)
+    @Query(value = "SELECT * FROM bank ORDER BY rand() LIMIT 5 ", nativeQuery = true)
     List<Bank> questions();
 }

@@ -2,7 +2,8 @@ window.onload = function getQuestions() {
     $.get("/student/questions", function (data) {
         for (let i = 0; i < data.length; i++) {
             console.log(data[i].text);
-            $("#q").append("<p>").append((i + 1) + '.&nbsp;' + data[i].text).append("</p>")
+            $("#q").append('<p id="' + i + '">'
+                + '<label htmlFor="' + i + '">' +(i + 1) + '.&nbsp;' + data[i].text+ '</label>')
                 .append(
                     '<input type="radio" id="' + data[i].id +
                     '"name="' + data[i].id + '" value="1">' +

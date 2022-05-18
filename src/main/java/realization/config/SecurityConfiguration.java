@@ -34,7 +34,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/").permitAll()
                 .and()
                 .authorizeRequests().antMatchers(
-                        "/student_v2.html")
+                        "/student.html")
                 .hasAuthority("student")
                 .and()
                 .authorizeRequests().antMatchers(

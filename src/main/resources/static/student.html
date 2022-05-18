@@ -5,49 +5,24 @@
     <title>Страница тестирования для студента</title>
     <link rel="stylesheet" href="/css/style.css"/>
     <script src="/webjars/jquery/3.6.0/jquery.min.js"></script>
-    <script type="text/javascript">
-        window.onload = function getQuestions() {
-            $.get("/student/questions", function (data) {
-                for (let i = 0; i < data.length; i++) {
-                    console.log(data[i].text);
-                    $("#q").append("<p>").append(data[i].text).append("</p>")
-                        .append(
-                            '<input type="radio" id="' + data[i].id +
-                            '"name="' + data[i].id + '" value="1">' +
-                            '<label htmlFor="' + data[i].id + '">' + data[i].var1 + '</label>',
-                            '<input type="radio" id="' + data[i].id +
-                            '"name="' + data[i].id + '" value="2">' +
-                            '<label htmlFor="' + data[i].id + '">' + data[i].var2 + '</label>',
-                            '<input type="radio" id="' + data[i].id +
-                            '"name="' + data[i].id + '" value="3">' +
-                            '<label htmlFor="' + data[i].id + '">' + data[i].var3 + '</label>',
-                            '<input type="radio" id="' + data[i].id +
-                            '"name="' + data[i].id + '" value="4">' +
-                            '<label htmlFor="' + data[i].id + '">' + data[i].var4 + '</label>');
-                }
-            }, "json")
-                .fail(function () {
-                    $("#rep")
-                        .append('<br/><p style="color:red">Oops! Error with XMLHttpRequest</p>')
-                });
-        }
-    </script>
+    <script src="js/student_1.js"></script>
+    <script src="js/student_2.js"></script>
 </head>
 <body>
 
 <div id="text">
-    <form action="/student" method="post">
+    <form method="post" id="ajax_form" action="">
         <div id="q">
         </div>
-        <div>
-        <span id="result">
-            Проверка еще не выполнялась.
-        </span>
-        </div>
-        <div>
-            <button type="submit" id="check">Проверить</button>
-        </div>
     </form>
+    <input type="button" id="btn" value="Отправить на проверку"/>
+    <button onclick="window.location.href='/logout'">
+        <img src="images/logout.jpg" style="vertical-align: middle">
+        Выйти из аккаунта
+    </button>
+    <br>
+    <div id="result_form"></div>
+
 </div>
 </body>
 </html>

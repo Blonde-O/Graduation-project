@@ -1,56 +1,57 @@
 package realization.service.impl;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import realization.dto.ResultDto;
 import realization.exception.RepeatedTestingException;
 import realization.model.Result;
 import realization.model.User;
+import realization.pojo.TotalValueResponse;
 import realization.repository.ResultRepository;
-import realization.repository.UserRepository;
-import realization.security.UserPrincipal;
 import realization.service.BankService;
 import realization.service.ResultService;
+import realization.service.UserService;
 
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
+import java.util.Objects;
 
 @Service
 @RequiredArgsConstructor
 public class ResultServiceImpl implements ResultService {
     private final BankService bankService;
-    private final UserRepository userRepository;
+    private final UserService userService;
     private final ResultRepository resultRepository;
 
 
     @Override
-    public Integer averageGrade(Map<String, String> answers) throws Exception {
-        System.out.println(answers);
-        List<Integer> keys = answers.keySet().stream().map(x -> Integer.valueOf(x)).collect(Collectors.toList());
-        List<Integer> values = answers.values().stream().map(x -> Integer.valueOf(x)).collect(Collectors.toList());
+    public TotalValueResponse averageGrade(Map<String, String> answers) {
+        List<Integer> keys = answers.keySet().stream().map(Integer::valueOf).toList();
+        List<Integer> values = answers.values().stream().map(Integer::valueOf).toList();
         double averageGrade = 0.0;
         for (int i = 0; i < keys.size(); i++) {
-            if (bankService.getControl(keys.get(i)) == values.get(i)) {
+            if (Objects.equals(bankService.getControl(keys.get(i)), values.get(i))) {
                 averageGrade += 1;
             }
         }
-        System.out.println(keys);
-        System.out.println(values);
-        Integer total = Integer.valueOf((int) Math.round((100 * averageGrade / keys.size())));
-        UserPrincipal userPrincipal = (UserPrincipal) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        String login = userPrincipal.getUsername();
-        User user = userRepository.findUserByLogin(login);
-        if (findExistingUser(user)){
-            throw new RepeatedTestingException("Повторное прохождение теста");
+        Integer total = (int) Math.round((100 * averageGrade / keys.size()));
+        TotalValueResponse totalValueResponse = new TotalValueResponse();
+        try {
+            saveResult(total);
+            if (total < 60) {
+                totalValueResponse.setResponseId(0);
+                totalValueResponse.setMessage("Ваш результат: " + total + "%. Вы не сдали тест.");
+            } else {
+                totalValueResponse.setResponseId(1);
+                totalValueResponse.setMessage("Ваш результат: " + total + "%. Вы сдали тест.");
+            }
+        } catch (RepeatedTestingException e) {
+            System.out.println(e.getMessage());
+            totalValueResponse.setResponseId(-1);
+            totalValueResponse.setMessage("ВЫ УЖЕ ПРОХОДИЛИ ТЕСТ.");
         }
-        Result result = new Result();
-        result.setUser(user);
-        result.setValue(total);
-        resultRepository.save(result);
 
-        return total;
+        return totalValueResponse;
     }
 
     @Override
@@ -59,7 +60,6 @@ public class ResultServiceImpl implements ResultService {
         List<ResultDto> resultDtoList = resultList.stream()
                 .map(x -> new ResultDto(x.getId(), x.getUser().getFio(), x.getValue()))
                 .toList();
-        System.out.println(resultDtoList);
         return resultDtoList;
     }
 
@@ -67,4 +67,16 @@ public class ResultServiceImpl implements ResultService {
     public boolean findExistingUser(User user) {
         return resultRepository.existsResultByUser(user);
     }
+
+    public void saveResult(Integer total) throws RepeatedTestingException {
+        User user = userService.getAuthorisedUser();
+        if (findExistingUser(user)) {
+            throw new RepeatedTestingException("Повторное прохождение теста");
+        }
+        Result result = new Result();
+        result.setUser(user);
+        result.setValue(total);
+        resultRepository.save(result);
+    }
+
 }

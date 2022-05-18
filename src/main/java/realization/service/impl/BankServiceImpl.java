@@ -5,9 +5,10 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import realization.dto.BankDto;
 import realization.mapper.BankMapper;
-import realization.model.Bank;
+import realization.model.User;
 import realization.repository.BankRepository;
 import realization.service.BankService;
+import realization.service.UserService;
 
 import java.util.List;
 
@@ -18,6 +19,7 @@ public class BankServiceImpl implements BankService {
 
     private final BankRepository bankRepository;
     private final BankMapper bankMapper;
+    private final UserService userService;
 
     @Override
     public Integer getControl(Integer id) {
@@ -26,6 +28,7 @@ public class BankServiceImpl implements BankService {
 
     @Override
     public List<BankDto> findAll() {
-        return bankMapper.toDtos(bankRepository.questions());
+        User user = userService.getAuthorisedUser();
+        return bankMapper.toDtos(bankRepository.questions(user.getId()));
     }
 }

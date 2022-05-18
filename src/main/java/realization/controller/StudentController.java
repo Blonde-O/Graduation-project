@@ -4,6 +4,7 @@ import org.springframework.security.access.annotation.Secured;
 import realization.dto.BankDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+import realization.pojo.TotalValueResponse;
 import realization.service.BankService;
 import realization.service.ResultService;
 
@@ -24,15 +25,8 @@ public class StudentController {
     }
 
     @PostMapping
-    public Integer complete(@RequestParam Map<String, String> allRequestParams) {
-        Integer a;
-        try {
-            a = resultService.averageGrade(allRequestParams);
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-            return -1;
-        }
-        return a;
+    public TotalValueResponse complete(@RequestParam Map<String, String> allRequestParams) throws Exception {
+        return resultService.averageGrade(allRequestParams);
     }
 
 }

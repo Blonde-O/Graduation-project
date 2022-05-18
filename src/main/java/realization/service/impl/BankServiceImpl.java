@@ -19,32 +19,6 @@ public class BankServiceImpl implements BankService {
     private final BankRepository bankRepository;
     private final BankMapper bankMapper;
 
-/*
-    @Override
-    public String getText(Integer id) {
-        return bankRepository.getById(id).getText();
-    }
-
-    @Override
-    public String getVar1(Integer id) {
-        return bankRepository.getById(id).getVar1();
-    }
-
-    @Override
-    public String getVar2(Integer id) {
-        return bankRepository.getById(id).getVar2();
-    }
-
-    @Override
-    public String getVar3(Integer id) {
-        return bankRepository.getById(id).getVar3();
-    }
-
-    @Override
-    public String getVar4(Integer id) {
-        return bankRepository.getById(id).getVar4();
-    }*/
-
     @Override
     public Integer getControl(Integer id) {
         return bankRepository.getById(id).getControl();

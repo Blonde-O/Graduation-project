@@ -49,6 +49,7 @@
                 data: $("#" + ajax_form).serialize(),
                 success: function (response) { //Данные отправлены успешно
                     var result = $.parseJSON(response);
+
                     if (result < 60) {
                         $('#result_form').html('Ваш результат:&nbsp ' + result + ' %.&nbsp Вы не сдали тест. ')
                             .css("color", "red")
@@ -56,6 +57,11 @@
                     } else {
                         $('#result_form').html('Ваш результат:&nbsp ' + result + ' %.&nbsp Вы сдали тест.')
                             .css("color", "green")
+                            .css("font-weight", "bold");
+                    }
+                    if (result ==-1){
+                        $('#result_form').html('ПОВТОРНОЕ ТЕСТИРОВАНИЕ ЗАПРЕЩЕНО')
+                            .css("color", "red")
                             .css("font-weight", "bold");
                     }
                 },

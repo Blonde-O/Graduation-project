@@ -4,8 +4,6 @@ import org.springframework.security.access.annotation.Secured;
 import realization.dto.BankDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
-import realization.repository.ResultRepository;
-import realization.repository.UserRepository;
 import realization.service.BankService;
 import realization.service.ResultService;
 
@@ -18,8 +16,6 @@ import java.util.*;
 public class StudentController {
     private final BankService bankService;
     private final ResultService resultService;
-    private final ResultRepository resultRepository;
-    private final UserRepository userRepository;
 
 
     @GetMapping("/questions")
@@ -27,18 +23,17 @@ public class StudentController {
         return bankService.findAll();
     }
 
-    /*@PostMapping
-    public void complete(@RequestParam Map<String, String> allRequestParams) {
-        Integer a = resultService.averageGrade(allRequestParams);
-        System.out.println(a + "%");
-    }*/
     @PostMapping
     public Integer complete(@RequestParam Map<String, String> allRequestParams) {
-        Integer a = resultService.averageGrade(allRequestParams);
+        Integer a;
+        try {
+            a = resultService.averageGrade(allRequestParams);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return -1;
+        }
         return a;
-
     }
-
 
 }
 

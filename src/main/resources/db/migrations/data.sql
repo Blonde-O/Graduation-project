@@ -17,6 +17,10 @@ values ('Александрова А.А.', 'aleksandrovaaa', '$2y$10$T1xEpkbIFWb
         'student');
 insert into USER(fio, login, password, role)
 values ('Андреев А.А.', 'andreevaa', '$2y$10$ouO4lUbmKZt02blKqlsRk.dqabaPTu2Rivp4Ii48NFJR6jHtMmiu.', 'student');
+insert into USER(fio, login, password, role)
+values ('Дмитриева Д.Д.', 'dmitrievadd', '$2y$10$dwxXszycwGCPqoY2JUiweuVC/ZBVIMxnIE4CLKSDQLgyLGj4Ueo2u', 'student');
+insert into USER(fio, login, password, role)
+values ('Антонов А.А.', 'antonovaa', '$2y$10$NA6hCt3TlEJjgzWKqobuouByciDK9kMSfUDuMTLTmvxwzt3xgS8hm', 'student');
 insert into BANK(text, var_1, var_2, var_3, var_4, control)
 values ('Безопасность жизнедеятельности — это',
         'наука', 'государственный орган', 'политическое движение',
